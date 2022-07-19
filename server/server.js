@@ -1,10 +1,8 @@
 const express = require("express");
 const morgan = require("morgan");
-const methodOverride = require("method-override");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
-const nameRoutes = require("./routes/name-routes");
-const { createPath, handleError } = require("./helpers/helper");
+// const nameRoutes = require("./routes/name-routes");
 const chalk = require("chalk");
 const successMsg = chalk.bgKeyword("green").white.bold;
 const errorMsg = chalk.bgKeyword("white").red;
@@ -29,17 +27,6 @@ app.use(
     reqMsg(":method :url :status :res[content-length] - :response-time ms")
   )
 );
-app.use(methodOverride("_method"));
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  const title = "Home";
-  res.render(createPath("index"), { title });
-});
-
-app.use(nameRoutes);
-
-app.use((req, res) => {
-  const title = "Error page";
-  res.status(404).render(createPath("error"), { title });
-});
+// app.use(nameRoutes);
