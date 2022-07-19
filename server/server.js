@@ -6,6 +6,7 @@ const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const indexRoutes = require("./routes/index");
+const errorMiddleware = require('./middlewares/error-middleware')
 
 const app = express();
 const successMsg = chalk.bgKeyword("green").white.bold;
@@ -37,5 +38,4 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 app.use('/api', indexRoutes);
-
-// app.use(nameRoutes);
+app.use(errorMiddleware)
