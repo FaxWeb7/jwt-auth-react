@@ -18,23 +18,14 @@ const App: FC = () => {
     try{
       const response = await UserService.fetchUsers();
       setUsers(response.data)
-
     } catch(e){
       console.log(e)
     }
   }
 
-  if (store.isLoading){
-    return(
-      <h1>Загрузка...</h1>
-    )
-  }
+  if (store.isLoading){return( <h1>Загрузка...</h1> )}
 
-  if (!store.isAuth){
-    return(
-      <LoginForm />
-    )
-  }
+  if (!store.isAuth){return( <LoginForm /> )}
 
   return (
     <>
