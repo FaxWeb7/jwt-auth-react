@@ -4,7 +4,7 @@ const uuid = require('uuid');
 const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
-const ApiError = require("../exceptions/api-error")
+const ApiError = require("../exceptions/api-error");
 
 class UserService {
   async registration(email, password) {
@@ -33,6 +33,50 @@ class UserService {
     }
     user.isActivated = true;
     await user.save()
+  }
+
+  async login (email, password){
+    const user = await Users.findOne({email: email})
+    if (!user){
+      throw ApiError.BadRequest(`Пользователь с почтовым адресом ${email} ещё не зарегистрирован`)
+    }
+    const isPasswordEquals = await bcrypt.compare(password, user.password)
+    if (!isPasswordEquals) {
+      throw ApiError.BadRequest("Пароль введён неверно")
+    }
+    const userDto = new UserDto(user)
+    const tokens = tokenService.generateTokens({...userDto})
+    await tokenService.saveToken(userDto.id, tokens.refreshToken)
+
+    return{ ...tokens, user: userDto }
+  }
+
+  async logout (refreshToken) {
+    const token = tokenService.removeToken(refreshToken);
+    return token
+  }
+
+  async refresh (refreshToken) {
+    if (!refreshToken){
+      throw ApiError.UnauthorizedError()
+    }
+    const userData = tokenService.validateRefreshToken(refreshToken);
+    const tokenFromDb = await tokenService.findToken(refreshToken);
+    if (!userData || !tokenFromDb) {
+      throw ApiError.UnauthorizedError()
+    }
+
+    const user = await Users.findById(userData.id)
+    const userDto = new UserDto(user)
+    const tokens = tokenService.generateTokens({...userDto})
+    await tokenService.saveToken(userDto.id, tokens.refreshToken)
+
+    return{ ...tokens, user: userDto }
+  }
+
+  async getAllUsers () {
+    const users = Users.find();
+    return users
   }
 }
 
