@@ -1,5 +1,6 @@
 ## React JWT Authentication (without Redux) with Node.js back-end
-
+ ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)   ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)   ![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)    ![Express.JS](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)   ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+<br /><br />
 This is JWT Authentication example with email confirmation, the backend of which is written in Node.js with a MongoDB database, and the frontend in React with LocalStorage, React Router and Axios. I’ll show you:
 
 - JWT Authentication Flow for User Signup & User Login
