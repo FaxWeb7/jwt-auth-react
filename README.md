@@ -49,4 +49,4 @@ For this example, server has only 6 endpoints:
 
 |  User model	|   Token model
 |:-:	|:-:	
-|  ![Image 1](https://i.ibb.co/yhfqJG9/2023-03-29-22-20-05.png)	|   ![Image 2](https://i.ibb.co/27NQgYy/2023-03-29-22-20-34.png)
+|  ![Image 1](https://i.ibb.co/wBjZMCg/2023-03-30-17-47-04.png)	|   ![Image 2](https://i.ibb.co/0Y02rBz/2023-03-30-17-47-17.png)
